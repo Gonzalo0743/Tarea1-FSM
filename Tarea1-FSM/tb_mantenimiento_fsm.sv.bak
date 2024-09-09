@@ -1,0 +1,42 @@
+module tb_mantenimiento_fsm;
+
+    logic clk;
+    logic reset;
+    logic M;
+    logic [7:0] estado;
+
+    // Instancia de la FSM
+    mantenimiento_fsm dut (
+        .clk(clk),
+        .reset(reset),
+        .M(M),
+        .estado(estado)
+    );
+
+    // Generador de reloj
+    always #5 clk = ~clk;
+
+    initial begin
+        // Inicialización
+        clk = 0;
+        reset = 1;
+        M = 0;
+        #20 reset = 0;  // Salir del reset
+        
+        // Esperar por 150 ciclos de reloj y presionar botón M
+        repeat(150) @(posedge clk);
+        M = 1;
+        @(posedge clk);
+        M = 0;
+
+        // Esperar 200 ciclos sin presionar botón para generar error
+        repeat(200) @(posedge clk);
+        
+        // Finalizar la simulación
+        $finish;
+    end
+
+    initial begin
+        $monitor("Time: %0t | Estado: %0h", $time, estado);
+    end
+endmodule

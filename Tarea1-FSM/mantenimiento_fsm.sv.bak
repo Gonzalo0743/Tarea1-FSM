@@ -1,0 +1,78 @@
+module mantenimiento_fsm (
+    input logic clk,
+    input logic reset,
+    input logic M,              // Botón de mantenimiento
+    output logic [7:0] estado   // Registro de estado
+);
+
+    typedef enum logic [1:0] {
+        ESPERA,                 // Estado de espera
+        MANTENIMIENTO,          // Estado de mantenimiento exitoso
+        ERROR                   // Estado de error
+    } state_t;
+
+    state_t estado_actual, estado_siguiente;
+    logic [7:0] contador;        // Contador para los ciclos de reloj
+    logic [7:0] num_mantenimientos; // Número de mantenimientos realizados
+
+    // Definir el número máximo de ciclos (200 en este caso)
+    parameter MAX_CICLOS = 8'd200;
+
+    // Máquina de estados
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            estado_actual <= ESPERA;
+            contador <= 8'd0;
+            num_mantenimientos <= 8'd0;
+            estado <= 8'd00;  // Estado inicial en el registro de estado
+        end
+        else begin
+            estado_actual <= estado_siguiente;
+        end
+    end
+
+    // Lógica de transición de estados
+    always_comb begin
+        case (estado_actual)
+            ESPERA: begin
+                if (M) begin
+                    estado_siguiente = MANTENIMIENTO;
+                end else if (contador >= MAX_CICLOS) begin
+                    estado_siguiente = ERROR;
+                end else begin
+                    estado_siguiente = ESPERA;
+                end
+            end
+            MANTENIMIENTO: begin
+                estado_siguiente = ESPERA;
+            end
+            ERROR: begin
+                estado_siguiente = ERROR; // Permanecer en error hasta reset
+            end
+            default: estado_siguiente = ESPERA;
+        endcase
+    end
+
+    // Lógica del contador
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset || estado_actual == MANTENIMIENTO) begin
+            contador <= 8'd0;
+        end
+        else if (estado_actual == ESPERA) begin
+            contador <= contador + 1;
+        end
+    end
+
+    // Actualización del registro de estado
+    always_ff @(posedge clk) begin
+        case (estado_actual)
+            MANTENIMIENTO: begin
+                num_mantenimientos <= num_mantenimientos + 1;
+                estado <= num_mantenimientos;
+            end
+            ERROR: begin
+                estado <= 8'hFF; // Código de error 0xFF
+            end
+        endcase
+    end
+endmodule

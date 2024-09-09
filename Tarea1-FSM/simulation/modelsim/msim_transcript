@@ -1,0 +1,53 @@
+# Reading pref.tcl
+# do Tarea1-FSM_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying D:/Programas/Quartus/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -sv -work work +incdir+D:/TEC/II\ Semestre\ 2024/Taller/Tarea1-FSM {D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/mantenimiento_fsm.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 16:08:02 on Sep 09,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+D:/TEC/II Semestre 2024/Taller/Tarea1-FSM" D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/mantenimiento_fsm.sv 
+# -- Compiling module mantenimiento_fsm
+# 
+# Top level modules:
+# 	mantenimiento_fsm
+# End time: 16:08:02 on Sep 09,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vlog -sv -work work +incdir+D:/TEC/II\ Semestre\ 2024/Taller/Tarea1-FSM {D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/tb_mantenimiento_fsm.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 16:08:02 on Sep 09,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+D:/TEC/II Semestre 2024/Taller/Tarea1-FSM" D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/tb_mantenimiento_fsm.sv 
+# -- Compiling module tb_mantenimiento_fsm
+# 
+# Top level modules:
+# 	tb_mantenimiento_fsm
+# End time: 16:08:02 on Sep 09,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  tb_mantenimiento_fsm
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs=""+acc"" tb_mantenimiento_fsm 
+# Start time: 16:08:03 on Sep 09,2024
+# Loading sv_std.std
+# Loading work.tb_mantenimiento_fsm
+# Loading work.mantenimiento_fsm
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# ** Note: $finish    : D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/tb_mantenimiento_fsm.sv(44)
+#    Time: 140 ps  Iteration: 0  Instance: /tb_mantenimiento_fsm
+# 1
+# Break in Module tb_mantenimiento_fsm at D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/tb_mantenimiento_fsm.sv line 44
+# End time: 16:08:33 on Sep 09,2024, Elapsed time: 0:00:30
+# Errors: 0, Warnings: 0
