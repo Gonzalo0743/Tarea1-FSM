@@ -9,9 +9,9 @@ module mantenimiento_fsm (
 
     // Definir los estados
     typedef enum logic [1:0] {
-        ESPERA     = 2'b00,
+        ESPERA        = 2'b00,
         MANTENIMIENTO = 2'b01,
-        ERROR      = 2'b10
+        ERROR         = 2'b10
     } estados_t;
 
     estados_t estado_actual, estado_siguiente;
@@ -20,31 +20,35 @@ module mantenimiento_fsm (
 
     // Lógica secuencial: Cambio de estado y contador de ciclos en el flanco del reloj
     always_ff @(posedge clk or posedge reset) begin
-        if (reset) begin
-            estado_actual <= ESPERA;
-            contador <= 8'd0;
-            contador_mantenimiento <= 8'd0;
-            num_mantenimientos <= 8'd0;
+    if (reset) begin
+        estado_actual <= ESPERA;  // Corrección: Inicializa el estado
+        contador <= 8'd0;
+        contador_mantenimiento <= 8'd0;
+        num_mantenimientos <= 8'd0;
+    end else begin
+        estado_actual <= estado_siguiente;  // Asegura que el estado se actualiza siempre
+        // Contador de ciclos
+        if (estado_actual == MANTENIMIENTO) begin
+            contador <= contador + 1;
         end else begin
-            estado_actual <= estado_siguiente;
+            contador <= 8'd0;  // Reinicia el contador fuera del mantenimiento
+        end
 
-            if (estado_actual == MANTENIMIENTO) begin
-                contador <= contador + 1; // Incrementar contador de ciclos
-            end else begin
-                contador <= 8'd0; // Reiniciar contador cuando no estamos en MANTENIMIENTO
-            end
+        // Actualización del contador de mantenimientos
+        if (estado_actual == MANTENIMIENTO && mantenimiento) begin
+            contador_mantenimiento <= contador_mantenimiento + 1;
+            num_mantenimientos <= contador_mantenimiento;
+        end else if (estado_actual != MANTENIMIENTO) begin
+            contador_mantenimiento <= contador_mantenimiento;
+        end
 
-            // Actualizar contador de mantenimientos
-            if (estado_actual == MANTENIMIENTO && mantenimiento) begin
-                contador_mantenimiento <= contador_mantenimiento + 1;
-                num_mantenimientos <= contador_mantenimiento;
-            end
-
-            if (estado_actual == ERROR) begin
-                num_mantenimientos <= 8'hFF; // Código de error 0xFF en estado ERROR
-            end
+        // Estado de error
+        if (estado_actual == ERROR) begin
+            num_mantenimientos <= 8'hFF;
         end
     end
+end
+
 
     // Lógica combinacional: Definir los estados siguientes
     always_comb begin
@@ -61,7 +65,7 @@ module mantenimiento_fsm (
             MANTENIMIENTO: begin
                 if (contador >= 8'd200) begin
                     estado_siguiente = ERROR; // Si excede 200 ciclos, ir a ERROR
-                end else if (mantenimiento) begin
+                end else if (!mantenimiento) begin  // Cambio: esperar que `mantenimiento` sea 0 para salir
                     estado_siguiente = ESPERA; // Volver a ESPERA después del mantenimiento
                 end
             end

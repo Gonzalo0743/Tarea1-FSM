@@ -1,5 +1,6 @@
 module tb_mantenimiento_fsm;
 
+    // Señales de prueba
     logic clk;
     logic reset;
     logic mantenimiento;  // Señal para activar/desactivar mantenimiento
@@ -17,47 +18,52 @@ module tb_mantenimiento_fsm;
         .terminado(terminado)
     );
 
-    // Generador de reloj
+    // Generador de reloj con un periodo de 10 unidades de tiempo
     always #5 clk = ~clk;
 
-    // Estímulos de prueba
+    // Monitor para visualizar los cambios en las señales importantes
     initial begin
-        $dumpfile("mantenimiento_fsm.vcd");
-        $dumpvars(0, tb_mantenimiento_fsm);
+        $monitor("Time=%0t | clk=%b | reset=%b | mantenimiento=%b | estado=%b | num_mantenimientos=%b | terminado=%b", 
+                 $time, clk, reset, mantenimiento, estado, num_mantenimientos, terminado);
+    end
 
+    // Bloque inicial para definir las pruebas
+    initial begin
         // Inicializar señales
         clk = 0;
         reset = 1;
         mantenimiento = 0;
 
-        // Ciclo inicial de reset
+        // Aplicar reset
         #10 reset = 0;  // Salir de reset
+        $display("Reset desactivado");
 
-        // Iniciar el primer ciclo de mantenimiento
+        // Primera prueba: Iniciar un ciclo de mantenimiento normal
         #10 mantenimiento = 1;
-        #10 mantenimiento = 0;
+        $display("Iniciando primer ciclo de mantenimiento");
+        #100 mantenimiento = 0;  // Después de 100 unidades de tiempo, salir de mantenimiento
+        $display("Mantenimiento terminado");
 
-        // Esperar un tiempo y observar el comportamiento
-        #100;
+        // Esperar un tiempo para observar el comportamiento después del mantenimiento
+        #50;
 
-        // Probar otro ciclo de mantenimiento
+        // Segunda prueba: Iniciar otro ciclo de mantenimiento
         #10 mantenimiento = 1;
-        #10 mantenimiento = 0;
+        $display("Iniciando segundo ciclo de mantenimiento");
+        #100 mantenimiento = 0;  // Terminar el segundo ciclo de mantenimiento
+        $display("Segundo mantenimiento terminado");
 
-        // Dejar suficiente tiempo para observar las transiciones de estados
-        #200;
+        // Esperar para observar la salida
+        #50;
 
-        // Forzar el estado de error superando los 200 ciclos de mantenimiento
+        // Tercera prueba: Forzar estado de error al exceder los ciclos de mantenimiento permitidos
         #10 mantenimiento = 1;
-        #500 mantenimiento = 0; // Esto debería llevar al estado de ERROR
+        $display("Forzando error al exceder los ciclos de mantenimiento");
+        #500 mantenimiento = 0;  // Mantener el mantenimiento activado por más de 200 ciclos
+        $display("Error forzado, estado de ERROR alcanzado");
 
+        // Esperar un tiempo para observar la transición al estado de ERROR
         #100 $finish;  // Finalizar la simulación
-    end
-
-    // Monitoreo de las señales para seguimiento
-    initial begin
-        $monitor("Time=%0t | clk=%b | reset=%b | mantenimiento=%b | estado=%b | num_mantenimientos=%b | terminado=%b", 
-                $time, clk, reset, mantenimiento, estado, num_mantenimientos, terminado);
     end
 
 endmodule

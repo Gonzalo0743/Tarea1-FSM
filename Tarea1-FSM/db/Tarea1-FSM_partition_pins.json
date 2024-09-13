@@ -48,11 +48,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "detener",
-					"strict" : false
-				},
-				{
-					"name" : "iniciar",
+					"name" : "mantenimiento",
 					"strict" : false
 				}
 			]

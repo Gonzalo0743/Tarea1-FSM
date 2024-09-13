@@ -18,5 +18,6 @@ Sim dir               :  simulation\modelsim
 
 Info: Starting NativeLink simulation with ModelSim-Altera software
 Sourced NativeLink script d:/programas/quartus/quartus/common/tcl/internal/nativelink/modelsim.tcl
+Warning: File Tarea1-FSM_run_msim_rtl_verilog.do already exists - backing up current file as Tarea1-FSM_run_msim_rtl_verilog.do.bak8
 Info: Spawning ModelSim-Altera Simulation software 
 Info: NativeLink simulation flow was successful

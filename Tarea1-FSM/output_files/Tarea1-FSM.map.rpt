@@ -1,5 +1,5 @@
 Analysis & Elaboration report for Tarea1-FSM
-Mon Sep 09 16:07:46 2024
+Fri Sep 13 17:41:38 2024
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -38,7 +38,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------+
 ; Analysis & Elaboration Summary                                              ;
 +-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Successful - Mon Sep 09 16:07:46 2024       ;
+; Analysis & Elaboration Status ; Successful - Fri Sep 13 17:41:38 2024       ;
 ; Quartus Prime Version         ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name                 ; Tarea1-FSM                                  ;
 ; Top-level Entity Name         ; mantenimiento_fsm                           ;
@@ -162,28 +162,29 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Mon Sep 09 16:07:39 2024
+    Info: Processing started: Fri Sep 13 17:41:31 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Tarea1-FSM -c Tarea1-FSM --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file mantenimiento_fsm.sv
-    Info (12023): Found entity 1: mantenimiento_fsm File: D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/mantenimiento_fsm.sv Line: 1
+    Info (12023): Found entity 1: mantenimiento_fsm File: D:/Github/Tarea1-FSM/Tarea1-FSM/mantenimiento_fsm.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file tb_mantenimiento_fsm.sv
-    Info (12023): Found entity 1: tb_mantenimiento_fsm File: D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/tb_mantenimiento_fsm.sv Line: 1
+    Info (12023): Found entity 1: tb_mantenimiento_fsm File: D:/Github/Tarea1-FSM/Tarea1-FSM/tb_mantenimiento_fsm.sv Line: 1
 Info (12127): Elaborating entity "mantenimiento_fsm" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at mantenimiento_fsm.sv(32): truncated value with size 32 to match size of target (8) File: D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/mantenimiento_fsm.sv Line: 32
-Warning (10034): Output port "estado" at mantenimiento_fsm.sv(6) has no driver File: D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/mantenimiento_fsm.sv Line: 6
-Info (144001): Generated suppressed messages file D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/output_files/Tarea1-FSM.map.smsg
-Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 4768 megabytes
-    Info: Processing ended: Mon Sep 09 16:07:46 2024
+Warning (10230): Verilog HDL assignment warning at mantenimiento_fsm.sv(32): truncated value with size 32 to match size of target (8) File: D:/Github/Tarea1-FSM/Tarea1-FSM/mantenimiento_fsm.sv Line: 32
+Warning (10230): Verilog HDL assignment warning at mantenimiento_fsm.sv(39): truncated value with size 32 to match size of target (8) File: D:/Github/Tarea1-FSM/Tarea1-FSM/mantenimiento_fsm.sv Line: 39
+Warning (10034): Output port "estado" at mantenimiento_fsm.sv(5) has no driver File: D:/Github/Tarea1-FSM/Tarea1-FSM/mantenimiento_fsm.sv Line: 5
+Info (144001): Generated suppressed messages file D:/Github/Tarea1-FSM/Tarea1-FSM/output_files/Tarea1-FSM.map.smsg
+Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 4769 megabytes
+    Info: Processing ended: Fri Sep 13 17:41:38 2024
     Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:18
+    Info: Total CPU time (on all processors): 00:00:17
 
 
 +--------------------------------------------+
 ; Analysis & Elaboration Suppressed Messages ;
 +--------------------------------------------+
-The suppressed messages can be found in D:/TEC/II Semestre 2024/Taller/Tarea1-FSM/output_files/Tarea1-FSM.map.smsg.
+The suppressed messages can be found in D:/Github/Tarea1-FSM/Tarea1-FSM/output_files/Tarea1-FSM.map.smsg.
 
 
